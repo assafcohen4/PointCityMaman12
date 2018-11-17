@@ -31,6 +31,7 @@ public class Point {
 
     }
 
+
     /**
      * Copy constructor
      * @param other point to be copied
@@ -41,22 +42,18 @@ public class Point {
         this._alpha = other._alpha;
     }
 
-    private double toDegrees(double radians){
-        return radians * (180/Math.PI);
-    }
-
-    private double toRadians(double degrees){
-        return degrees * (Math.PI/180);
+    private double round(double d){
+        return Math.round(d*10000)/(double)10000;
     }
 
     /** gets x value of point  */
     public double getX(){
-        return _radius * Math.cos(_alpha);
+        return round(_radius * Math.cos(_alpha));
     }
 
     /** gets y value of point  */
     public double getY(){
-        return _radius * (Math.sin(_alpha));
+        return round(_radius * (Math.sin(_alpha)));
     }
 
     /** sets x value
@@ -64,7 +61,7 @@ public class Point {
      */
     public void setX(double num){
 
-        if(num>= 0){
+        if(num >= 0){
           this._radius = Math.sqrt(Math.pow(num,2) + Math.pow(this.getY(),2));
           this._alpha = Math.acos(num/this._radius) ;
         }

@@ -8,15 +8,17 @@ public class City {
     /**
      * creates a new City object
      * @param cityName name of the city
-     * @param cityCenter a Point that represents the center of the city
-     * @param centralStation a Point that represents the central station of the city
+     * @param cityCenterX
+     * @param cityCenterY
+     * @param centralStationX
+     * @param centralStationY
      * @param numOfResidents number of residents of the city
      * @param noOfNeighborhoods number of neighborhoods in the city
      */
-    public City(String cityName, Point cityCenter, Point centralStation, long numOfResidents, int noOfNeighborhoods){
+    public City(String cityName, double cityCenterX, double cityCenterY, double centralStationX, double centralStationY, long numOfResidents, int noOfNeighborhoods){
         this._cityName = cityName;
-        this._cityCenter = cityCenter;
-        this._centralStation = centralStation;
+        this._cityCenter = new Point(cityCenterX,cityCenterY);
+        this._centralStation = new Point(centralStationX,centralStationY);
         if (numOfResidents >= 0) {
             this._numOfResidents = numOfResidents;
         } else {
@@ -166,7 +168,7 @@ public class City {
         }
 
 
-        City newCity = new City(name, newCityCenter, newCentralStation,0,1);
+        City newCity = new City(name, newCityCenter.getX(), newCityCenter.getY(), newCentralStation.getX(), newCentralStation.getY(),0,1);
         return newCity;
     }
 }
