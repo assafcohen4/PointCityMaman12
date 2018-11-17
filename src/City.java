@@ -22,8 +22,9 @@ public class City {
         } else {
             this._numOfResidents = 0;
         }
-        if(noOfNeighborhoods >= 1)
-        this._noOfNeighborhoods = noOfNeighborhoods;
+        if(noOfNeighborhoods >= 1) {
+            this._noOfNeighborhoods = noOfNeighborhoods;
+        }
         else{
             this._noOfNeighborhoods = 0;
         }
@@ -107,7 +108,7 @@ public class City {
                + "City Center: " + this.getCityCenter() + "\n"
                + "Central Station: " + this.getCentralStation() + "\n"
                + "Number of Residents: " + this.getNumOfResidents() + "\n"
-               + "Number of Neighborhoods" + this.getNoOfNeighborhoods();
+               + "Number of Neighborhoods " + this.getNoOfNeighborhoods();
 
        return format;
     }
@@ -126,6 +127,10 @@ public class City {
         return false;
     }
 
+    /**
+     * @param deltaX  new X location
+     * @param deltaY new Y location
+     */
     public void moveCentralStation(double deltaX, double deltaY){
         Point newStationLocation = new Point(this.getCentralStation().getX() + deltaX, this.getCentralStation().getY() + deltaY);
 
@@ -134,24 +139,32 @@ public class City {
         }
     }
 
+    /**
+     * @return distance between city center and station
+     */
     public double distanceBetweenCenterAndStation(){
          return this.getCityCenter().distance(this.getCentralStation());
     }
 
+    /**
+     * @param name name of the new city
+     * @param dX x location of new city relatively to this city
+     * @param dY y location of new city relatively to this city
+     * @return new city
+     */
     public City newCity(String name, double dX, double dY){
 
-        Point newCityCenter = new Point(dX,dY);
-        if(dX < 0 || dY < 0){
+        Point newCityCenter = new Point(this.getCityCenter().getX() + dX,this.getCityCenter().getY() + dY);
+        if(newCityCenter.getX() < 0 || newCityCenter.getY() < 0){
             newCityCenter = new Point(this.getCityCenter());
         }
 
-        double newXCetralStation = this.getCentralStation().getX() + dX;
-        double newYCetralStation = this.getCentralStation().getX() + dY;
-        Point newCentralStation = new Point(newXCetralStation, newYCetralStation);
 
-        if(newXCetralStation < 0 || newYCetralStation < 0){
-            newCentralStation = new Point(this.getCentralStation());
+        Point newCentralStation = new Point(this.getCentralStation().getX() + dX,this.getCentralStation().getY() + dY);
+        if(newCentralStation.getX() < 0 || newCentralStation.getY() < 0){
+            newCentralStation= new Point(this.getCentralStation());
         }
+
 
         City newCity = new City(name, newCityCenter, newCentralStation,0,1);
         return newCity;

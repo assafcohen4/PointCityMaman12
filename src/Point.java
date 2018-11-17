@@ -8,6 +8,8 @@
 public class Point {
 
     private double _radius;
+
+    /**In Radians*/
     private double _alpha;
 
     //constructors:
@@ -18,9 +20,13 @@ public class Point {
      */
 
     public Point(double x, double y){
-        if(x < 0 && y < 0){
+        if(x >= 0 && y >= 0){
            this._radius = Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
-           this._alpha = Math.atan(y/x) * (180/Math.PI);
+           this._alpha = Math.atan(y/x);
+        }
+        else {
+            this._radius = 0;
+            this._alpha = 0;
         }
 
     }
@@ -35,14 +41,22 @@ public class Point {
         this._alpha = other._alpha;
     }
 
+    private double toDegrees(double radians){
+        return radians * (180/Math.PI);
+    }
+
+    private double toRadians(double degrees){
+        return degrees * (Math.PI/180);
+    }
+
     /** gets x value of point  */
     public double getX(){
-        return _radius * (Math.cos(_alpha) * (180/Math.PI));
+        return _radius * Math.cos(_alpha);
     }
 
     /** gets y value of point  */
     public double getY(){
-        return _radius * (Math.sin(_alpha) * (180/Math.PI));
+        return _radius * (Math.sin(_alpha));
     }
 
     /** sets x value
@@ -52,7 +66,7 @@ public class Point {
 
         if(num>= 0){
           this._radius = Math.sqrt(Math.pow(num,2) + Math.pow(this.getY(),2));
-          this._alpha = Math.acos(num/this._radius) * (180/Math.PI) ;
+          this._alpha = Math.acos(num/this._radius) ;
         }
     }
 
@@ -62,7 +76,7 @@ public class Point {
     public void setY(double num){
         if(num>= 0){
             this._radius = Math.sqrt(Math.pow(num,2) + Math.pow(this.getX(),2));
-            this._alpha = Math.asin(num/this._radius) * (180/Math.PI) ;
+            this._alpha = Math.asin(num/this._radius);
         }
     }
 
