@@ -127,8 +127,6 @@ public class City {
     }
 
     public void moveCentralStation(double deltaX, double deltaY){
-
-
         Point newStationLocation = new Point(this.getCentralStation().getX() + deltaX, this.getCentralStation().getY() + deltaY);
 
         if(!(newStationLocation.getX() < 0 || newStationLocation.getY() < 0)) {
@@ -137,10 +135,25 @@ public class City {
     }
 
     public double distanceBetweenCenterAndStation(){
-
+         return this.getCityCenter().distance(this.getCentralStation());
     }
 
     public City newCity(String name, double dX, double dY){
 
+        Point newCityCenter = new Point(dX,dY);
+        if(dX < 0 || dY < 0){
+            newCityCenter = new Point(this.getCityCenter());
+        }
+
+        double newXCetralStation = this.getCentralStation().getX() + dX;
+        double newYCetralStation = this.getCentralStation().getX() + dY;
+        Point newCentralStation = new Point(newXCetralStation, newYCetralStation);
+
+        if(newXCetralStation < 0 || newYCetralStation < 0){
+            newCentralStation = new Point(this.getCentralStation());
+        }
+
+        City newCity = new City(name, newCityCenter, newCentralStation,0,1);
+        return newCity;
     }
 }
